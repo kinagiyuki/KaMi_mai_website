@@ -1,7 +1,10 @@
+//Title
 var title=new String();
 title+="<div class=\"row\"><div class=\"col-md-6 col-lg-6 col-sm-6 col-xs-6\"><img class=\"pull-right img-responsive\" src=\"img/logo_maimai.png\"></div>"
 title+="<div class=\"col-md-6 col-lg-6 col-sm-6 col-xs-6\"><div class=\"brand\">Team KaMi</div>";
 title+="<div class=\"address-bar\">Koakari is bigbig</div></div></div>";
+
+//Navigation bar
 var content="";
 content+="<nav class=\"navbar navbar-default\" role=\"navigation\">";
 content+="<div class=\"container\">";
@@ -28,5 +31,12 @@ content+="</div>";
 //.container
 content+="</nav>";
 
+//Footer
+var footer="";
+footer+="<footer><div class=\"container\"><div class=\"row\"><div class=\"col-lg-12 text-center\">";
+footer+="<img src=\"img/logo_sega.png\"><small>v.0.05</small>";
+footer+="</div></div></div></footer>";
+
 document.getElementById("JS_title").innerHTML = title;
 document.getElementById("JS_navigate").innerHTML = content;
+document.getElementById("JS_footer").innerHTML = footer;
