@@ -1,6 +1,6 @@
 var today = new Date();
-var startdate = new Date(2016,11,22);
-var deadline = new Date(2017,0,5);
+var startdate = new Date(2017,0,6);
+var deadline = new Date(2017,0,19);
 var dateDifference = parseInt((deadline-today)/(24*3600*1000));
 var period = parseInt((deadline-startdate)/(24*3600*1000));
 var percent = parseInt((period-dateDifference)/period*100);
