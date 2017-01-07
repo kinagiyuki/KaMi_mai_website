@@ -1,13 +1,4 @@
-<div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">團任
-                        <strong>murasaki week 2/3</strong>
-                    </h2>
-                    <hr>
 
-                    <div id="deadline"></div>
 
                     <ul class="nav nav-tabs nav-justified">
 						<li class="active"><a href="#1" data-toggle="tab">Tracks View</a></li>
@@ -17,7 +8,7 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="1">
 		                    <table class="table table-responsive"> 
-		                    <caption><h4>任務期間四首指定曲達到指定Rank <a href="info.html" class="btn btn-info" role="button" target="_blank">教學</a></h4></caption> 
+		                    <caption><h4>任務期間四首指定曲達到指定Rank</h4></caption> 
 		                    <thead> 
 			                    <tr> 
 				                    <th>#</th> 
@@ -148,7 +139,7 @@
 
 		                <div class="tab-pane" id="2">
 		                	<br>
-		                	<h4>任務期間四首指定曲達到指定Rank <a href="info.html" class="btn btn-info" role="button" target="_blank">教學</a></h4>
+		                	<h4>任務期間四首指定曲達到指定Rank</h4>
 		                	<br>
 		                    <div class="row">
 		                    		<ul class="nav nav-pills nav-stacked col-xs-3">
@@ -697,7 +688,4 @@
 		                    </div>
 		                </div>
 		            </div>
-                    <p>除ジングルベル外，可從A、B曲選一完成，無需完成兩首。</p>
-                </div>
-            </div>
-        </div>
+                    <p>除　<b>ジングルベル</b>　外，可從A、B曲選一完成，無需完成兩首。</p>

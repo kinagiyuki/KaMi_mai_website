@@ -1,3 +1,9 @@
+//Useful function
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+
 //Title
 var title=new String();
 title+="<div class=\"row\"><div class=\"col-md-6 col-lg-6 col-sm-6 col-xs-6\"><img class=\"pull-right img-responsive\" src=\"img/logo_maimai.png\"></div>"
@@ -23,6 +29,10 @@ content+="<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collaps
 content+="<ul class=\"nav navbar-nav\">";
 content+="<li><a href=\"index.html\">Home</a></li>";
 content+="<li><a href=\"info.html\">Info</a></li>";
+content+="<li class=\"dropdown\"><a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Mission<span class=\"caret\"></span></a>";
+content+="<ul class=\"dropdown-menu\">";
+content+="<li><a href=\"previous_mission.html?m=m1\">Murasaki week2/3</a></li>";
+content+="</ul></li>";
 //content+="<li><a href=\"blog.html\">Blog</a></li>";
 //content+="<li><a href=\"contact.html\">Contact</a></li>";
 content+="</ul></div>";
@@ -34,7 +44,7 @@ content+="</nav>";
 //Footer
 var footer="";
 footer+="<footer><div class=\"container\"><div class=\"row\"><div class=\"col-lg-12 text-center\">";
-footer+="<img src=\"img/logo_sega.png\"><small>v.0.05</small>";
+footer+="<img src=\"img/logo_sega.png\"><small>v.0.07</small>";
 footer+="</div></div></div></footer>";
 
 document.getElementById("JS_title").innerHTML = title;
