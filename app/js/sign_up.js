@@ -1,7 +1,7 @@
-initalizeFirebase();
+//initalizeFirebase();
 var database = firebase.database();
 
-function addNameToUserAndGetUID(name)
+function addNameToUserAndGetUID(name, email, mainame, RT)
 {
 	firebase.auth().onAuthStateChanged(function(user) {
 			if(user)
@@ -16,17 +16,18 @@ function addNameToUserAndGetUID(name)
 				  // An error happened.
 				  alert("Something happened");
 				});
-				localStorage.setItem('_uid', user.uid);
+				//localStorage.setItem('_uid', user.uid);
+				writeUserData(user.uid, name, email, mainame, RT);
 				console.log("User Information updated");
 			}
 			else{alert("User has not been logged-in.");}
 			});
 }
 
-function writeUserData(name, email, mainame, RT) {
-	var uid = localStorage.getItem('_uid');
-	console.log(uid);
-	firebase.database().ref('users/' + uid).set({
+function writeUserData(userID, name, email, mainame, RT) {
+	//var uid = localStorage.getItem('_uid');
+	//console.log(uid);
+	firebase.database().ref('users/' + userID).set({
 	    username: name,
 	    email: email,
 	    maiName: mainame,
@@ -36,7 +37,7 @@ function writeUserData(name, email, mainame, RT) {
 	});
 }
 
-var signUp = function() {
+function signUp() {
 	var Email = document.getElementById('userEmail').value;
 	var Password = document.getElementById('userPassword').value;
 	var confirmPassword = document.getElementById('confirmPassword').value;
@@ -66,16 +67,16 @@ var signUp = function() {
 	  console.log(errorMessage);
 	});
 	console.log("Created");
-	window.setTimeout(addNameToUserAndGetUID(Name),6000);
-	window.setTimeout(writeUserData(Name, Email, maiName, maiRT), 12000);
+	window.setTimeout(addNameToUserAndGetUID(Name, Email, maiName, maiRT),6000);
+	//window.setTimeout(writeUserData(Name, Email, maiName, maiRT), 12000);
 	//alert("Sign up successful! Redirecting to homepage...");
 	//window.location.href = "index.html";
 };
 
-window.onload = function() {
+/*window.onload = function() {
 
 	document.getElementById("click_to_signup").onclick = signUp;
-}
+}*/
 // inject firebase service
 /*var app = angular.module("signupApp", ["firebase"]); 
 app.controller("signupCtrl", 
