@@ -16,7 +16,6 @@ function addNameToUserAndGetUID(name)
 				  // An error happened.
 				  alert("Something happened");
 				});
-				//uid = user.uid;
 				localStorage.setItem('_uid', user.uid);
 				console.log("User Information updated");
 			}
@@ -24,15 +23,17 @@ function addNameToUserAndGetUID(name)
 			});
 }
 
-function writeUserData(userId, name, email, mainame, RT) {
-  firebase.database().ref('users/' + userId).set({
-    username: name,
-    email: email,
-    maiName: mainame,
-    rating: RT,
-    missionRecord: "",
-    isAdmin: false
-  });
+function writeUserData(name, email, mainame, RT) {
+	var uid = localStorage.getItem('_uid');
+	console.log(uid);
+	firebase.database().ref('users/' + uid).set({
+	    username: name,
+	    email: email,
+	    maiName: mainame,
+	    rating: RT,
+	    missionRecord: "",
+	    isAdmin: false
+	});
 }
 
 var signUp = function() {
@@ -62,13 +63,13 @@ var signUp = function() {
 	  // Handle Errors here.
 	  var errorCode = error.code;
 	  var errorMessage = error.message;
-	  alert(errorMessage);
+	  console.log(errorMessage);
 	});
 	console.log("Created");
-	setTimeout(addNameToUserAndGetUID(Name),3500);
-	uid = localStorage.getItem('_uid');
-	console.log(uid);
-	setTimeout(writeUserData(uid, Name, Email, maiName, maiRT), 3500);
+	window.setTimeout(addNameToUserAndGetUID(Name),6000);
+	window.setTimeout(writeUserData(Name, Email, maiName, maiRT), 12000);
+	//alert("Sign up successful! Redirecting to homepage...");
+	//window.location.href = "index.html";
 };
 
 window.onload = function() {

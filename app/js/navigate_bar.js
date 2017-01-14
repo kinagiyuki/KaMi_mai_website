@@ -17,6 +17,9 @@ function initalizeFirebase() {
 	}
 }
 
+initalizeFirebase();
+
+var user = firebase.auth().currentUser;
 
 //Title
 var title=new String();
@@ -47,14 +50,29 @@ content+="<li class=\"dropdown\"><a class=\"dropdown-toggle\" data-toggle=\"drop
 content+="<ul class=\"dropdown-menu\">";
 content+="<li><a href=\"previous_mission.html?m=m1\">Murasaki week2/3</a></li>";
 content+="</ul></li>";
-content+="<li><a href=\"sign_up.html\">Sign-up</a></li>";
+if(user)
+{
+	content+="<li><a href=\"\">Profile</a></li>";
+}
+else
+{
+	content+="<li><a href=\"sign_up.html\">Sign-up</a></li>";
+}
 //content+="<li><a href=\"blog.html\">Blog</a></li>";
 //content+="<li><a href=\"contact.html\">Contact</a></li>";
 content+="</ul>";
-content+="<form class=\"navbar-form navbar-right\">";
-content+="<div class=\"form-group\"><input type=\"email\" class=\"form-control\" placeholder=\"Email\"></div>　";
-content+="<div class=\"form-group\"><input type=\"password\" class=\"form-control\" placeholder=\"Password\"></div>　";
-content+="<button type=\"submit\" class=\"btn btn-default\">Login</button></form>";
+if(user)
+{
+	content+="<p class=\"navbar-text\">Signed in as " + user.displayName + "</p>";
+	content+="<button type=\"button\" class=\"btn btn-default navbar-btn\" id=\"click_to_logout\" onclick=\"logOut()\">Logout</button></form>";
+}
+else
+{
+	content+="<form class=\"navbar-form navbar-right\">";
+	content+="<div class=\"form-group\"><input type=\"email\" class=\"form-control\" placeholder=\"Email\" id=\"loginEmail\"></div>　";
+	content+="<div class=\"form-group\"><input type=\"password\" class=\"form-control\" placeholder=\"Password\" id=\"loginPassword\"></div>　";
+	content+="<button type=\"button\" class=\"btn btn-default navbar-btn\" id=\"click_to_login\" onclick=\"logIn()\">Login</button></form>";
+}
 //.navbar-collapse
 content+="</div></div>";
 //.container
@@ -69,3 +87,30 @@ footer+="</div></div></div></footer>";
 document.getElementById("JS_title").innerHTML = title;
 document.getElementById("JS_navigate").innerHTML = content;
 document.getElementById("JS_footer").innerHTML = footer;
+
+var logOut = function() {
+	firebase.auth().signOut().then(function() {
+	  // Sign-out successful.
+	}, function(error) {
+	  // An error happened.
+	  alert("Something goes wrong");
+	});
+	location.reload();
+}
+
+var logIn = function() {
+	var Email = document.getElementById("loginEmail").value;
+	var Password = document.getElementById("loginPassword").value;
+	firebase.auth().signInWithEmailAndPassword(Email, Password).catch(function(error) {
+	  // Handle Errors here.
+	  var errorCode = error.code;
+	  var errorMessage = error.message;
+	  alert(errorMessage);
+	});
+	location.reload();
+}
+
+window.onload = function() {
+	document.getElementById("click_to_logout").onclick = logOut;
+	document.getElementById("click_to_login").onclick = logIn;
+}
