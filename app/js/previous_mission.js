@@ -1,11 +1,6 @@
 var missionName = getURLParameter("m");
 console.log(missionName);
-var title = "";
-if(missionName=="m1")
-{
-	title+="murasaki week2/3";
-}
-document.getElementById("MIS_title").innerHTML = title;
+
 
 var url = "../src/" + missionName + ".txt";
 console.log(url);

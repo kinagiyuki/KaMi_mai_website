@@ -3,6 +3,20 @@ function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
+//Initialize Firebase
+function initalizeFirebase() {
+	if (firebase.apps.length === 0) {
+		  var config = {
+		    apiKey: "AIzaSyCNDu-fjb9fNCl8tUlsfQqZ5je7pd2AAbU",
+		    authDomain: "teamkami-maimai.firebaseapp.com",
+		    databaseURL: "https://teamkami-maimai.firebaseio.com",
+		    storageBucket: "teamkami-maimai.appspot.com",
+		    messagingSenderId: "26088081835"
+		  };
+		  firebase.initializeApp(config);
+	}
+}
+
 
 //Title
 var title=new String();
@@ -33,11 +47,16 @@ content+="<li class=\"dropdown\"><a class=\"dropdown-toggle\" data-toggle=\"drop
 content+="<ul class=\"dropdown-menu\">";
 content+="<li><a href=\"previous_mission.html?m=m1\">Murasaki week2/3</a></li>";
 content+="</ul></li>";
+content+="<li><a href=\"sign_up.html\">Sign-up</a></li>";
 //content+="<li><a href=\"blog.html\">Blog</a></li>";
 //content+="<li><a href=\"contact.html\">Contact</a></li>";
-content+="</ul></div>";
+content+="</ul>";
+content+="<form class=\"navbar-form navbar-right\">";
+content+="<div class=\"form-group\"><input type=\"email\" class=\"form-control\" placeholder=\"Email\"></div>　";
+content+="<div class=\"form-group\"><input type=\"password\" class=\"form-control\" placeholder=\"Password\"></div>　";
+content+="<button type=\"submit\" class=\"btn btn-default\">Login</button></form>";
 //.navbar-collapse
-content+="</div>";
+content+="</div></div>";
 //.container
 content+="</nav>";
 

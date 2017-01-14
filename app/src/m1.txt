@@ -1,4 +1,10 @@
-
+					<div class="col-xs-12">
+	                    <hr>
+		                    <h2 class="intro-text text-center">
+		                        <strong>murasaki week2/3</strong>
+		                    </h2>
+	                    <hr>
+               		</div>
 
                     <ul class="nav nav-tabs nav-justified">
 						<li class="active"><a href="#1" data-toggle="tab">Tracks View</a></li>
