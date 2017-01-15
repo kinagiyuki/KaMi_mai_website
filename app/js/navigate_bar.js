@@ -19,14 +19,13 @@ function initalizeFirebase() {
 
 initalizeFirebase();
 
-//var user = firebase.auth().currentUser;
+var Admin = localStorage.getItem("_admin");
 
 //Title
 var title="";
 title+="<div class=\"row\"><div class=\"col-md-6 col-lg-6 col-sm-6 col-xs-6\"><img class=\"pull-right img-responsive\" src=\"img/logo_maimai.png\"></div>"
 title+="<div class=\"col-md-6 col-lg-6 col-sm-6 col-xs-6\"><div class=\"brand\">Team KaMi</div>";
 title+="<div class=\"address-bar\">Koakari is bigbig</div></div></div>";
-
 //Navigation bar
 var content="";
 content+="<nav class=\"navbar navbar-default\" role=\"navigation\">";
@@ -54,6 +53,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 	if(user)
 	{
 		console.log("Logged in");
+		console.log(Admin);
+		if(Admin=='true')
+			{content+="<li><a href=\"\">Admin</a></li>";}
 		content+="<li><a href=\"\">Profile</a></li>";
 		content+="</ul>";
 		content+="<p class=\"navbar-text\">Signed in as " + user.displayName + "</p>";
@@ -113,25 +115,39 @@ document.getElementById("JS_footer").innerHTML = footer;
 function logOut() {
 	firebase.auth().signOut().then(function() {
 	  // Sign-out successful.
+	  if(localStorage.getItem('_uid')!=null)
+	  	localStorage.removeItem('_uid');
+	  if(localStorage.getItem('_username')!=null)
+	  	localStorage.removeItem('_username');
+	  if(localStorage.getItem('_admin')!=null)
+	  	localStorage.removeItem('_admin');
+	  location.reload();
 	}, function(error) {
 	  // An error happened.
 	  alert("Something goes wrong");
 	});
-	location.reload();
 }
 
 function logIn() {
 	var Email = document.getElementById("loginEmail").value;
 	var Password = document.getElementById("loginPassword").value;
-	console.log(Email);
-	console.log(Password);
-	firebase.auth().signInWithEmailAndPassword(Email, Password).catch(function(error) {
+	firebase.auth().signInWithEmailAndPassword(Email, Password).then(function(user) {
+
+		firebase.database().ref('users/' + user.uid).once('value').then(function(snapshot) {
+		  var isAdmin = snapshot.val().isAdmin;
+		  localStorage.setItem('_uid', user.uid);
+		  localStorage.setItem('_username', user.displayName);
+		  localStorage.setItem('_admin', isAdmin);
+		  location.reload();
+		});
+
+	}).catch(function(error) {
 	  // Handle Errors here.
 	  var errorCode = error.code;
 	  var errorMessage = error.message;
+	  console.log(errorCode);
 	  alert(errorMessage);
 	});
-	location.reload();
 }
 
 /*window.onload = function() {

@@ -11,14 +11,15 @@ function addNameToUserAndGetUID(name, email, mainame, RT)
 				  photoURL: ""
 				}).then(function() {
 				  // Update successful.
-				  alert("Update successful");
+				  console.log("Update successful");
 				}, function(error) {
 				  // An error happened.
-				  alert("Something happened");
+				  console.log("Something happened");
 				});
-				//localStorage.setItem('_uid', user.uid);
 				writeUserData(user.uid, name, email, mainame, RT);
 				console.log("User Information updated");
+				alert("Sign up successful! Redirecting to homepage...");
+				window.location.href = "index.html";
 			}
 			else{alert("User has not been logged-in.");}
 			});
@@ -44,7 +45,6 @@ function signUp() {
 	var Name = document.getElementById('userName').value;
 	var maiName = document.getElementById('maiName').value;
 	var maiRT = document.getElementById('maiRating').value;
-	var uid="";
 	console.log(Email);
 	console.log(Password);
 	console.log(Name);
@@ -60,14 +60,16 @@ function signUp() {
 		alert("Two passwords are different!");
 		return;
 	}
-	firebase.auth().createUserWithEmailAndPassword(Email, Password).catch(function(error) {
+	firebase.auth().createUserWithEmailAndPassword(Email, Password).then(function(user) {
+		addNameToUserAndGetUID(Name, Email, maiName, maiRT);
+	}).catch(function(error) {
 	  // Handle Errors here.
 	  var errorCode = error.code;
 	  var errorMessage = error.message;
 	  console.log(errorMessage);
 	});
 	console.log("Created");
-	window.setTimeout(addNameToUserAndGetUID(Name, Email, maiName, maiRT),6000);
+	//window.setTimeout(addNameToUserAndGetUID(Name, Email, maiName, maiRT),6000);
 	//window.setTimeout(writeUserData(Name, Email, maiName, maiRT), 12000);
 	//alert("Sign up successful! Redirecting to homepage...");
 	//window.location.href = "index.html";

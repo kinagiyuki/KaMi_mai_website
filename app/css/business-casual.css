@@ -180,7 +180,7 @@ footer p {
     }
 
     .navbar-nav {
-        display: inline-block;
+        display: inline;
         float: none;
         margin: 0 auto;
         table-layout: fixed;
