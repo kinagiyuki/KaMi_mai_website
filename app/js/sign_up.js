@@ -69,83 +69,9 @@ function signUp() {
 	  console.log(errorMessage);
 	});
 	console.log("Created");
-	//window.setTimeout(addNameToUserAndGetUID(Name, Email, maiName, maiRT),6000);
-	//window.setTimeout(writeUserData(Name, Email, maiName, maiRT), 12000);
-	//alert("Sign up successful! Redirecting to homepage...");
-	//window.location.href = "index.html";
 };
 
 /*window.onload = function() {
 
 	document.getElementById("click_to_signup").onclick = signUp;
 }*/
-// inject firebase service
-/*var app = angular.module("signupApp", ["firebase"]); 
-app.controller("signupCtrl", 
-
-	// User information
-	function($scope, $firebaseArray) {
-
-		$scope.input = {
-			uid: "",
-			maiName: "",
-			rating: "",
-			missionRecord: "",
-			isAdmin: false
-		};
-
-		$scope.userEmail="";
-		$scope.userPassword="";
-		$scope.confirmPassword="";
-		$scope.userName="";
-
-		// sync with firebaseArray
-		var ref = firebase.database().ref("users");
-		$scope.userInfos = $firebaseArray(ref);
-
-		$scope.regUser = function() {
-			console.log($scope.userEmail);
-			console.log($scope.userPassword);
-			if($scope.userEmail!="" && $scope.userPassword!="")
-			{
-				firebase.auth().createUserWithEmailAndPassword($scope.userEmail, $scope.userPassword).catch(function(error) {
-				  // Handle Errors here.
-				  var errorCode = error.code;
-				  var errorMessage = error.message;
-				  alert(errorMessage);
-				  console.log("Created");
-				});
-			}
-
-			firebase.auth().signInWithEmailAndPassword($scope.userEmail, $scope.userPassword).catch(function(error) {
-			  // Handle Errors here.
-			  var errorCode = error.code;
-			  var errorMessage = error.message;
-			  alert(errorMessage);
-			  console.log("Logged in");
-			});
-
-			firebase.auth().onAuthStateChanged(function(user) {
-			if(user)
-			{
-				user.updateProfile({
-				  displayName: $scope.userName,
-				  photoURL: ""
-				}).then(function() {
-				  // Update successful.
-				}, function(error) {
-				  // An error happened.
-				  alert("Something happened");
-				});
-				$scope.input.uid = user.uid;
-				console.log("User Information updated");
-			}
-			else{alert("User has not been reged.");}
-			});
-			if($scope.input.maiName!="" && $scope.input.rating!="" && $scope.input.uid!="")
-			{
-				$scope.userInfos.$add($scope.input);
-			}
-		};
-	}
-);*/

@@ -56,7 +56,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		console.log(Admin);
 		if(Admin=='true')
 			{content+="<li><a href=\"\">Admin</a></li>";}
-		content+="<li><a href=\"\">Profile</a></li>";
+		content+="<li><a href=\"profile.html\">Profile</a></li>";
 		content+="</ul>";
 		content+="<p class=\"navbar-text\">Signed in as " + user.displayName + "</p>";
 		content+="<button type=\"button\" class=\"btn btn-default navbar-btn\" id=\"click_to_logout\" onclick=\"logOut()\">Logout</button>";
@@ -121,7 +121,7 @@ function logOut() {
 	  	localStorage.removeItem('_username');
 	  if(localStorage.getItem('_admin')!=null)
 	  	localStorage.removeItem('_admin');
-	  location.reload();
+	  window.location.href = "index.html";
 	}, function(error) {
 	  // An error happened.
 	  alert("Something goes wrong");
@@ -138,7 +138,7 @@ function logIn() {
 		  localStorage.setItem('_uid', user.uid);
 		  localStorage.setItem('_username', user.displayName);
 		  localStorage.setItem('_admin', isAdmin);
-		  location.reload();
+		  window.location.href = "index.html";
 		});
 
 	}).catch(function(error) {
