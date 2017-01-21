@@ -17,6 +17,8 @@ function addNameToUserAndGetUID(name, email, mainame, RT)
 				  console.log("Something happened");
 				});
 				writeUserData(user.uid, name, email, mainame, RT);
+				localStorage.setItem('_uid', user.uid);
+			  	localStorage.setItem('_username', name);
 				console.log("User Information updated");
 				alert("Sign up successful! Redirecting to homepage...");
 				window.location.href = "index.html";
@@ -34,7 +36,8 @@ function writeUserData(userID, name, email, mainame, RT) {
 	    maiName: mainame,
 	    rating: RT,
 	    missionRecord: "",
-	    isAdmin: false
+	    isAdmin: false,
+	    photoURL: ""
 	});
 }
 

@@ -23,9 +23,10 @@ var Admin = localStorage.getItem("_admin");
 
 //Title
 var title="";
-title+="<div class=\"row\"><div class=\"col-md-6 col-lg-6 col-sm-6 col-xs-6\"><img class=\"pull-right img-responsive\" src=\"img/logo_maimai.png\"></div>"
+/*title+="<div class=\"row\"><div class=\"col-md-6 col-lg-6 col-sm-6 col-xs-6\"><a href=\"index.html\"><img class=\"pull-right img-responsive\" src=\"img/logo_maimai.png\"></a></div>"
 title+="<div class=\"col-md-6 col-lg-6 col-sm-6 col-xs-6\"><div class=\"brand\">Team KaMi</div>";
-title+="<div class=\"address-bar\">Koakari is bigbig</div></div></div>";
+title+="<div class=\"address-bar\">Koakari is bigbig</div></div></div>";*/
+title+="<a href=\"index.html\"><img class=\"img-responsive center-block\" src=\"img/KaMi_logo.png\"></a>";
 //Navigation bar
 var content="";
 content+="<nav class=\"navbar navbar-default\" role=\"navigation\">";
@@ -48,6 +49,7 @@ content+="<li><a href=\"info.html\">Info</a></li>";
 content+="<li class=\"dropdown\"><a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Mission<span class=\"caret\"></span></a>";
 content+="<ul class=\"dropdown-menu\">";
 content+="<li><a href=\"previous_mission.html?m=m1\">Murasaki week2/3</a></li>";
+content+="<li><a href=\"previous_mission.html?m=m2\">Murasaki week4/5</a></li>";
 content+="</ul></li>";
 firebase.auth().onAuthStateChanged(function(user) {
 	if(user)
@@ -55,7 +57,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		console.log("Logged in");
 		console.log(Admin);
 		if(Admin=='true')
-			{content+="<li><a href=\"\">Admin</a></li>";}
+			{content+="<li><a href=\"admin.html\">Admin</a></li>";}
 		content+="<li><a href=\"profile.html\">Profile</a></li>";
 		content+="</ul>";
 		content+="<p class=\"navbar-text\">Signed in as " + user.displayName + "</p>";
@@ -74,12 +76,28 @@ firebase.auth().onAuthStateChanged(function(user) {
 		content+="<form class=\"navbar-form navbar-right\">";
 		content+="<div class=\"form-group\"><input type=\"email\" class=\"form-control\" placeholder=\"Email\" id=\"loginEmail\"></div>　";
 		content+="<div class=\"form-group\"><input type=\"password\" class=\"form-control\" placeholder=\"Password\" id=\"loginPassword\"></div>　";
-		content+="<input type=\"button\" class=\"btn btn-default navbar-btn\" id=\"click_to_login\" onclick=\"logIn()\" value=\"Login\"></form>";
+		content+="<button type=\"button\" class=\"btn btn-default navbar-btn\" id=\"click_to_login\" onclick=\"logIn()\">Login</button></form>";
 		//.navbar-collapse
 		content+="</div></div>";
 		//.container
 		content+="</nav>";
 		document.getElementById("JS_navigate").innerHTML = content;	
+
+		document.getElementById("loginEmail")
+		    .addEventListener("keyup", function(event) {
+		    event.preventDefault();
+		    if (event.keyCode == 13) {
+		        document.getElementById("click_to_login").click();
+		    }
+		});
+
+		document.getElementById("loginPassword")
+		    .addEventListener("keyup", function(event) {
+		    event.preventDefault();
+		    if (event.keyCode == 13) {
+		        document.getElementById("click_to_login").click();
+		    }
+		});
 	}
 });
 //content+="<li><a href=\"blog.html\">Blog</a></li>";
@@ -111,6 +129,7 @@ footer+="</div></div></div></footer>";
 document.getElementById("JS_title").innerHTML = title;
 //document.getElementById("JS_navigate").innerHTML = content;
 document.getElementById("JS_footer").innerHTML = footer;
+
 
 function logOut() {
 	firebase.auth().signOut().then(function() {

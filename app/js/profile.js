@@ -1,4 +1,5 @@
 initalizeFirebase();
+var frag_uploadPhoto = false;
 
 var displayPhotoURL="";
 firebase.auth().onAuthStateChanged(function(user) {
@@ -83,6 +84,8 @@ function uploadIcon()
 				  photoURL: downloadURL
 				}).then(function() {
 				  // Update successful.
+				  frag_uploadPhoto = true;
+				  updateInfo();
 				}, function(error) {
 				  // An error happened.
 				});
@@ -91,13 +94,13 @@ function uploadIcon()
 	  document.getElementById("displayPhoto").src = downloadURL + new Date().getTime();
 	});
 }
-
+console.log(frag_uploadPhoto);
 function updateInfo()
 {
 	var newUsername = document.getElementById("displayUsername").value;
 	var newMainame = document.getElementById("displayMainame").value;
 	var newRating = document.getElementById("displayRating").value;
-	if(newUsername == displayUsername && newMainame == displayMainame && newRating == displayRating)
+	if(newUsername == displayUsername && newMainame == displayMainame && newRating == displayRating && frag_uploadPhoto==false)
 		{alert("Saved.");return;}
 	var updateData = {
 		username: newUsername,
@@ -105,12 +108,26 @@ function updateInfo()
 		rating: newRating,
 		email: displayEmail,
 		isAdmin: displayIsAdmin,
-		missionRecord: displayMissionRecord
+		missionRecord: displayMissionRecord,
+		photoURL: ""
 	};
-	var update = {};
-	update['users/' + uid] = updateData;
-	firebase.database().ref().update(update);
-	return alert("Saved.");
+	firebase.auth().onAuthStateChanged(function(user) {
+		if(user){
+			user.updateProfile({
+				displayName: newUsername
+			}).then(function() {
+				  // Update successful.
+				updateData.photoURL = user.photoURL;
+				var update = {};
+				update['users/' + uid] = updateData;
+				firebase.database().ref().update(update);
+				alert("Saved.");
+				location.reload();
+			}, function(error) {
+				  // An error happened.
+			});
+		}
+	});
 }
 
 /*window.onload = function() {
